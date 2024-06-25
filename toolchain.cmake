@@ -1,3 +1,12 @@
+set(STM32_MCU_NAME @MCU_NAME@)
+set(STM32_ROOT_PATH @ROOT_PATH@)
+set(STM32_LIB_PATH @LIB_PATH@)
+set(STM32_CMAKE_CONFIG_PATH @CMAKE_CONFIG_PATH@)
+set(STM32_INCLUDE_PATH @INCLUDE_PATH@)
+set(STM32_TOOLCHAIN_PATH @TOOLCHAIN_PATH@)
+set(STM32_TARGET_FAMILY "@genlink_family@")
+set(STM32_TARGET_SUBFAMILY "@genlink_subfamily@")
+
 # Set to 'Generic' for systems that don't have an OS (eg: embedded)
 set(CMAKE_SYSTEM_NAME Generic)
 # Custom argument, used to select build options from:
@@ -40,15 +49,12 @@ string(STRIP "${CMAKE_C_FLAGS}" CMAKE_C_FLAGS)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} ${TGT_CPPFLAGS_LIST} ${TGT_CXX_FLAGS}")
 string(STRIP "${CMAKE_CXX_FLAGS}" CMAKE_CXX_FLAGS)
 set(CMAKE_EXE_LINKER_FLAGS ${TGT_LDFLAGS_LIST})
-string(STRIP "${CMAKE_LD_FLAGS}" CMAKE_LD_FLAGS)
+string(STRIP "${CMAKE_EXE_LINKER_FLAGS}" CMAKE_EXE_LINKER_FLAGS)
 
 set(CMAKE_EXECUTABLE_SUFFIX .elf)
 set(CMAKE_EXECUTABLE_SUFFIX_ASM .elf)
 set(CMAKE_EXECUTABLE_SUFFIX_C .elf)
 set(CMAKE_EXECUTABLE_SUFFIX_CXX .elf)
-
-set(TARGET_FAMILY "@genlink_family@")
-set(TARGET_SUBFAMILY "@genlink_subfamily@")
 
 function(stm32_add_post_build target)
     add_custom_command(

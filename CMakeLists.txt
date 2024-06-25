@@ -12,7 +12,13 @@ if (NOT DEFINED ROOT_PATH)
     set(ROOT_PATH /opt/stm32-collection)
 endif()
 
-if (NOT DEFINED SPECS)
+if (NOT DEFINED ENABLE_ONCHIP_DEBUGGING)
+    set(ENABLE_ONCHIP_DEBUGGING TRUE)
+endif()
+
+if (ENABLE_ONCHIP_DEBUGGING)
+    set(SPECS rdimon.specs)
+else()
     set(SPECS nosys.specs)
 endif()
 
@@ -129,8 +135,11 @@ list(APPEND TGT_LDFLAGS -lc -lgcc -Wl,--end-group)
 if(${NOSTARTFILES})
     list(APPEND TGT_LDFLAGS -nostartfiles)
 endif()
-list(APPEND TGT_LDFLAGS -T${INSTALL_LINKER_SCRIPT})
+list(APPEND TGT_LDFLAGS -T${LINKER_SCRIPT_INSTALL})
 
+if (ENABLE_ONCHIP_DEBUGGING)
+    list(APPEND TGT_LDFLAGS -lc -lrdimon)
+endif()
 
 # Create toolchain file
 
