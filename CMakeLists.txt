@@ -9,7 +9,7 @@ if (NOT DEFINED MCU_NAME)
 endif()
 
 if (NOT DEFINED ROOT_PATH)
-    set(ROOT_PATH /opt/stm32-collection)
+    set(ROOT_PATH /opt/stm32)
 endif()
 
 if (NOT DEFINED ENABLE_ONCHIP_DEBUGGING)
